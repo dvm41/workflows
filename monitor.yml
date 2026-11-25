@@ -1,0 +1,14 @@
+name: Kufar Monitor
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # каждые 5 минут
+  workflow_dispatch:
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Run Kufar Monitor
+        run: |
+          curl -s --max-time 120 https://dvm4.cu.ma/monitor_worker.php
+          echo "Done at $(date)"
